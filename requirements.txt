@@ -1,0 +1,11 @@
+﻿asf_search>=7.2
+asf_tools>=0.10
+rasterio
+numpy
+scipy
+pandas
+geopandas
+shapely
+rich
+tqdm
+scikit-image

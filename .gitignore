@@ -1,0 +1,17 @@
+﻿# Python
+__pycache__/
+*.pyc
+.venv/
+env/
+# Datos grandes (no subir al repo)
+data/raw/
+data/dem/
+data/results/
+data/impact/
+data/masks/
+*.tif
+*.zip
+*.SAFE
+# QGIS temporales
+*.qgd
+*.qgs~
