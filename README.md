@@ -98,7 +98,7 @@ The LEO landscape is accelerating; many SAR options are available. SARWatch **em
 
 ## 6. Platform Architecture
 
-> **Note:** The repo implements a local Python pipeline; the table below sketches a typical future **cloud** deployment.
+> **Note:** The repo implements a local Python pipeline; the table below sketches a real **cloud** demo deployment with no integrated inputs - outputs.
 
 ### Cloud Infrastructure (AWS)
 
@@ -256,6 +256,7 @@ Google Cloud Text-to-Speech → Audio generation
 ChatGPT → consulting tool
 Open data: ESA Sentinel-1, NASA DEMs
 Libraries: rasterio, GeoPandas, shapely, GDAL/PROJ, QGIS
+
 
 
 
