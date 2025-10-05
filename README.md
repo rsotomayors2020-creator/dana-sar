@@ -1,11 +1,11 @@
-# ClearSight
+# SARWatch
 ============
 
 <p align="center">
   <img src="SARWatch frontend.jpg" width="600" alt="SAR Satellite Example">
 </p>
 
-**ClearSight** is an open-source research initiative and prototype platform that leverages **Synthetic Aperture Radar (SAR)** satellite imagery for **real-time monitoring and analysis of natural disasters**.  
+**SARWatch** is an open-source research initiative and prototype platform that leverages **Synthetic Aperture Radar (SAR)** satellite imagery for **real-time monitoring and analysis of natural disasters**.  
 The project aims to enable resilient, weather-independent Earth observation by integrating open and commercial SAR data through a modern, cloud-based architecture.
 
 ---
@@ -15,7 +15,7 @@ The project aims to enable resilient, weather-independent Earth observation by i
 Conventional optical satellites are powerful tools for observing Earth's surface but fail under adverse weather conditions such as clouds, smoke, or volcanic ash.  
 SAR satellites, however, can operate **day and night**, **penetrate atmospheric layers**, and **detect ground changes at centimeter-level precision**.  
 
-**ClearSight** uses this capability to provide an intelligent monitoring system for:
+**SARWatch** uses this capability to provide an intelligent monitoring system for:
 - Floods, fires, and volcanic eruptions  
 - Ground deformation and subsidence  
 - Infrastructure damage  
@@ -50,7 +50,7 @@ This makes **real-time monitoring** and **rapid emergency response** extremely d
 
 ## 2. Proposed Solution
 
-**ClearSight** proposes the creation of a web-based platform to collect, process, and visualize **SAR satellite data** for near real-time disaster monitoring.
+**SARWatch** proposes the creation of a web-based platform to collect, process, and visualize **SAR satellite data** for near real-time disaster monitoring.
 
 ### Key Advantages of SAR
 - **Weather independence:** Operates day and night, unaffected by sunlight or clouds.  
@@ -174,4 +174,5 @@ Feel free to fork, modify, and contribute.
 ## Acknowledgments
 
 This research draws inspiration from recent SAR and LEO advancements reported by:
+
 
