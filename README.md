@@ -169,10 +169,10 @@ According to **Goldman Sachs Research**, the satellite market could grow from **
 
 ## Acknowledgments
 
-Claude --> used for web page creation
-Ai.invideo.io --> Video generation
-GoogleCloud Text to speach --> Audio generation
-ChatGPT --> consulting tool
+- Claude --> used for web page creation
+- Ai.invideo.io --> Video generation
+- GoogleCloud Text to speach --> Audio generation
+- ChatGPT --> consulting tool
 
 
 
