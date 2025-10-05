@@ -71,38 +71,6 @@ The IfcOpenShell C++ codebase is split into multiple interal libraries:
 | serializers               | Internal library for IfcOpenShell                                     | LGPL-3.0-or-later\* |
 
  
- # DANA-SAR (Space Apps 2025)
-
-**Objetivo:** Mapas rápidos de inundación con SAR (Sentinel-1, C-band, VV/VH), clases de profundidad relativa (HAND) y **priorización de infra** (carreteras/puentes).
-
-## Instalación
-\\\ash
-conda create -n dana-sar python=3.11 -y
-conda activate dana-sar
-pip install -r requirements.txt
-\\\
-
-## Estructura
-- \data/aoi/\ AOI y capas vectoriales (roads.gpkg, bridges.gpkg)
-- \data/raw/\ descargas RTC (no versionadas)
-- \data/dem/\ DEM para HAND (no versionado)
-- \data/results/\ resultados raster (no versionados)
-- \src/\ scripts
-- \qgis/\ proyecto y simbología
-
-## Uso básico
-1) Exporta tu AOI a \data/aoi/aoi.geojson\.
-2) Ejecuta los scripts (ajusta rutas/fechas dentro de los .py):
-   - \ 1_search_download.py\
-   - \ 2_watermap_hand.py\
-   - \ 3_change_detection.py\
-   - \ 4_impact_infra.py\
-3) Abre QGIS y carga \data/results/*.tif\ + \data/aoi/*.gpkg\ para maquetar.
-
-## Nota
-No subimos GeoTIFFs ni zips grandes (ver \.gitignore\). Añade un AOI de ejemplo pequeño.
-
-
 
 
 [LGPL]: https://github.com/IfcOpenShell/IfcOpenShell/tree/master/COPYING.LESSER "LGPL-3.0-or-later"
@@ -117,3 +85,4 @@ No subimos GeoTIFFs ni zips grandes (ver \.gitignore\). Añade un AOI de ejemplo
 [nix/build-all.py]: https://github.com/IfcOpenShell/IfcOpenShell/tree/master/nix/build-all.py "nix/build-all.py"
  
  
+
