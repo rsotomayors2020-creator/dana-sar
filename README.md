@@ -1,88 +1,176 @@
-
-IfcOpenShell 
+# ClearSight
 ============
 
 <p align="center">
-<img src="https://github.com/IfcOpenShell/IfcOpenShell/assets/88302/34901387-e2dd-4a0c-8e38-9ffc32a66cde">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/9/9d/SAR_satellite_example.jpg" width="600" alt="SAR Satellite Example">
 </p>
 
+**ClearSight** is an open-source research initiative and prototype platform that leverages **Synthetic Aperture Radar (SAR)** satellite imagery for **real-time monitoring and analysis of natural disasters**.  
+The project aims to enable resilient, weather-independent Earth observation by integrating open and commercial SAR data through a modern, cloud-based architecture.
 
-IfcOpenShell is an open source ([LGPL]) software library for working with Industry Foundation Classes ([IFC]). Complete
-parsing support is provided for [IFC2x3 TC1], [IFC4 Add2 TC1], IFC4x1, IFC4x2, and [IFC4x3 Add2]. Extensive geometric support
-is implemented for the IFC releases [IFC2x3 TC1] and [IFC4 Add2 TC1]. Extending with support for arbitrary IFC schemas
-is possible at compile-time when using C++ and at run-time when using Python.
+---
 
-In addition to a C++ and Python API, IfcOpenShell comes with an ecosystem of tools, notably including IfcConvert (an application
-to convert IFC models to other formats), Bonsai (an add-on to Blender providing a graphical IFC authoring platform),
-and many other libraries, CLI apps, and more. Support is also provided for auxiliary standards such as BCF and IDS.
+## Overview
 
-For more information, see:
+Conventional optical satellites are powerful tools for observing Earth's surface but fail under adverse weather conditions such as clouds, smoke, or volcanic ash.  
+SAR satellites, however, can operate **day and night**, **penetrate atmospheric layers**, and **detect ground changes at centimeter-level precision**.  
 
-* [IfcOpenShell Website](http://ifcopenshell.org)
-* [IfcOpenShell Documentation](https://docs.ifcopenshell.org)
-  * [IfcOpenShell C++ Installation](https://docs.ifcopenshell.org/ifcopenshell/installation.html)
-  * [IfcOpenShell Python Installation](https://docs.ifcopenshell.org/ifcopenshell-python/installation.html)
-  * [IfcOpenShell Python Hello World Tutorial](https://docs.ifcopenshell.org/ifcopenshell-python/hello_world.html)
-* [Bonsai Website](https://bonsaibim.org)
-* [Bonsai Documentation](https://docs.bonsaibim.org/index.html)
-  * [Add-on Installation](https://docs.bonsaibim.org/quickstart/installation.html)
-  * [Exploring an IFC model](https://docs.bonsaibim.org/quickstart/explore_model.html)
- 
-Development is sponsored through your generous donations!
+**ClearSight** uses this capability to provide an intelligent monitoring system for:
+- Floods, fires, and volcanic eruptions  
+- Ground deformation and subsidence  
+- Infrastructure damage  
+- Climate and environmental tracking  
 
-[![Open Collective Contributors](https://img.shields.io/opencollective/all/opensourcebim?label=Sponsors&color=22ce5f)](https://opencollective.com/opensourcebim/)
+---
 
-Contents
+## Contents
 --------
 
-| Name                      | Description                                                           | License             | Service |
-| ------------------------- | --------------------------------------------------------------------- | ------------------- | ------- |
-| bcf                       | Library to read and write BCF-XML and query OpenCDE BCF-API modules   | LGPL-3.0-or-later   | [![PyPI](https://img.shields.io/pypi/v/bcf-client?label=PyPI&color=006dad)](https://pypi.org/project/bcf-client/) [![Anaconda-Server Badge](https://anaconda.org/conda-forge/bcf-client/badges/version.svg)](https://anaconda.org/conda-forge/bcf-client) |
-| bonsai                    | Add-on to Blender providing a graphical native IFC authoring platform | GPL-3.0-or-later    | [![Official](https://img.shields.io/badge/BonsaiBIM.org-Download-70ba35)](https://bonsaibim.org/download.html) [![GitHub Unstable](https://img.shields.io/github/v/release/ifcopenshell/ifcopenshell?filter=bonsai-*&label=GitHub-Unstable&color=f6f8fa)](https://github.com/IfcOpenShell/IfcOpenShell/releases?q=bonsai&expanded=true) [![Chocolatey](https://img.shields.io/chocolatey/v/blenderbim-nightly?label=Chocolatey&color=5c9fd8)](https://community.chocolatey.org/packages/blenderbim-nightly/) |
-| bsdd                      | Library to query the bSDD API                                         | LGPL-3.0-or-later   | [![PyPI](https://img.shields.io/pypi/v/bsdd?label=PyPI&color=006dad)](https://pypi.org/project/bsdd/) |
-| ifc2ca                    | Utility to convert IFC structural analysis models to Code_Aster       | LGPL-3.0-or-later   |
-| ifc4d                     | Convert to and from IFC and project management software               | LGPL-3.0-or-later   | [![PyPI](https://img.shields.io/pypi/v/ifc4d?label=PyPI&color=006dad)](https://pypi.org/project/ifc4d/) |
-| ifc5d                     | Report and optimise cost information from IFC                         | LGPL-3.0-or-later   | [![PyPI](https://img.shields.io/pypi/v/ifc5d?label=PyPI&color=006dad)](https://pypi.org/project/ifc5d/) |
-| ifcbimtester              | Wrapper for Gherkin based unit testing for IFC models                 | LGPL-3.0-or-later   |
-| ifcblender                | Historic Blender IFC import add-on                                    | LGPL-3.0-or-later\* |
-| ifccityjson               | Convert CityJSON to IFC                                               | LGPL-3.0-or-later   | [![PyPI](https://img.shields.io/pypi/v/ifccityjson?label=PyPI&color=006dad)](https://pypi.org/project/ifccityjson/) |
-| ifcclash                  | Clash detection library and CLI app                                   | LGPL-3.0-or-later   | [![PyPI](https://img.shields.io/pypi/v/ifcclash?label=PyPI&color=006dad)](https://pypi.org/project/ifcclash/) |
-| ifcconvert                | CLI app to convert IFC to many other formats                          | LGPL-3.0-or-later\* | [![Official](https://img.shields.io/badge/IfcOpenShell.org-Download-70ba35)](https://docs.ifcopenshell.org/ifcconvert/installation.html) [![GitHub](https://img.shields.io/github/v/release/ifcopenshell/ifcopenshell?filter=ifcconvert-*&label=GitHub&color=f6f8fa)](https://github.com/IfcOpenShell/IfcOpenShell/releases?q=ifcconvert&expanded=true)
-| ifccsv                    | Library and CLI app to export and import schedules from IFC           | LGPL-3.0-or-later   | [![PyPI](https://img.shields.io/pypi/v/ifccsv?label=PyPI&color=006dad)](https://pypi.org/project/ifccsv/) |
-| ifcdiff                   | Compare changes between IFC models                                    | LGPL-3.0-or-later   | [![PyPI](https://img.shields.io/pypi/v/ifcdiff?label=PyPI&color=006dad)](https://pypi.org/project/ifcdiff/) |
-| ifcfm                     | Extract IFC data for FM handover requirements                         | LGPL-3.0-or-later   | [![PyPI](https://img.shields.io/pypi/v/ifcfm?label=PyPI&color=006dad)](https://pypi.org/project/ifcfm/) |
-| ifcmax                    | Historic extension for IFC support in 3DS Max                         | LGPL-3.0-or-later\* | [![Official](https://img.shields.io/badge/IfcOpenShell.org-Download-70ba35)](https://docs.ifcopenshell.org/ifcmax.html)
-| ifcopenshell-python       | Python library for IFC manipulation                                   | LGPL-3.0-or-later\* | [![Official](https://img.shields.io/badge/IfcOpenShell.org-Download-70ba35)](https://docs.ifcopenshell.org/ifcopenshell-python/installation.html) [![GitHub](https://img.shields.io/github/v/release/ifcopenshell/ifcopenshell?filter=ifcopenshell-python-*&label=GitHub&color=f6f8fa)](https://github.com/IfcOpenShell/IfcOpenShell/releases?q=ifcopenshell-python&expanded=true) [![PyPI](https://img.shields.io/pypi/v/ifcopenshell?label=PyPI&color=006dad)](https://pypi.org/project/ifcopenshell/) [![Anaconda](https://img.shields.io/conda/vn/conda-forge/ifcopenshell?label=Anaconda&color=43b02a)](https://anaconda.org/conda-forge/ifcopenshell) [![Anaconda](https://img.shields.io/conda/vn/ifcopenshell/ifcopenshell?label=Anaconda-Unstable&color=43b02a)](https://anaconda.org/ifcopenshell/ifcopenshell) [![Docker](https://img.shields.io/docker/pulls/aecgeeks/ifcopenshell?label=Docker&color=1D63ED)](https://hub.docker.com/r/aecgeeks/ifcopenshell) [![AUR](https://img.shields.io/aur/version/ifcopenshell?label=AUR&color=1793d1)](https://aur.archlinux.org/packages/ifcopenshell) [![AUR Unstable](https://img.shields.io/aur/version/ifcopenshell-git?label=AUR-Unstable&color=1793d1)](https://aur.archlinux.org/packages/ifcopenshell-git) |
-| ifcpatch                  | Utility to run pre-packaged scripts to manipulate IFCs                | LGPL-3.0-or-later   | [![PyPI](https://img.shields.io/pypi/v/ifcpatch?label=PyPI&color=006dad)](https://pypi.org/project/ifcpatch/) |
-| ifcsverchok               | Blender Add-on for visual node programming with IFC                   | GPL-3.0-or-later    | [![GitHub Unstable](https://img.shields.io/github/v/release/ifcopenshell/ifcopenshell?filter=ifcsverchok-*.*.*.*&label=GitHub-Unstable&color=f6f8fa)](https://github.com/IfcOpenShell/IfcOpenShell/releases?q=ifcsverchok&expanded=true)
-| ifctester                 | Library, CLI and webapp for IDS model auditing                        | LGPL-3.0-or-later   | [![PyPI](https://img.shields.io/pypi/v/ifctester?label=PyPI&color=006dad)](https://pypi.org/project/ifctester/) |
+| Section | Description |
+| -------- | ------------ |
+| [1. Problem Statement](#1-problem-statement) | Challenges with optical satellites during disasters |
+| [2. Proposed Solution](#2-proposed-solution) | SAR-based approach for real-time monitoring |
+| [3. Current Limitations](#3-current-limitations) | Data frequency and availability issues |
+| [4. Technological Context](#4-technological-context) | Market and LEO ecosystem evolution |
+| [5. Applications](#5-applications) | Real-world use cases |
+| [6. Platform Architecture](#6-platform-architecture) | Cloud design and data flow |
+| [7. Functional Modules](#7-functional-modules) | UI and user roles |
+| [8. Data Sources](#8-data-sources) | Integration with open and commercial providers |
+| [9. Non-Functional Requirements](#9-non-functional-requirements) | Scalability, security, reliability |
+| [10. Future Enhancements](#10-future-enhancements) | Planned improvements |
 
-The IfcOpenShell C++ codebase is split into multiple interal libraries:
+---
 
-| Name                      | Description                                                           | License             |
-| ------------------------- | --------------------------------------------------------------------- | ------------------- |
-| ifcgeom                   | Internal library for IfcOpenShell                                     | LGPL-3.0-or-later\* |
-| ifcgeom\_schema\_agnostic | Internal library for IfcOpenShell                                     | LGPL-3.0-or-later\* |
-| ifcgeomserver             | Internal library for IfcOpenShell                                     | LGPL-3.0-or-later\* |
-| ifcjni                    | Internal library for IfcOpenShell                                     | LGPL-3.0-or-later\* |
-| ifcparse                  | Internal library for IfcOpenShell                                     | LGPL-3.0-or-later\* |
-| ifcwrap                   | Internal library for IfcOpenShell                                     | LGPL-3.0-or-later\* |
-| qtviewer                  | Internal library for IfcOpenShell                                     | LGPL-3.0-or-later\* |
-| serializers               | Internal library for IfcOpenShell                                     | LGPL-3.0-or-later\* |
+## 1. Problem Statement
 
- 
+During extreme weather events (storms, hurricanes, fires, eruptions), optical satellites cannot capture usable imagery due to clouds, smoke, or dust.  
+This makes **real-time monitoring** and **rapid emergency response** extremely difficult.
 
+---
 
-[LGPL]: https://github.com/IfcOpenShell/IfcOpenShell/tree/master/COPYING.LESSER "LGPL-3.0-or-later"
-[IFC]: https://technical.buildingsmart.org/standards/ifc/ "IFC"
-[IFC2x3 TC1]: https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/ "IFC2x3 TC1"
-[IFC4 Add2 TC1]: https://standards.buildingsmart.org/IFC/RELEASE/IFC4/ADD2_TC1/HTML/ "IFC4 Add2 TC1"
-[IFC4x3 Add2]: https://standards.buildingsmart.org/IFC/RELEASE/IFC4_3/ "IFC4x3 Add2"
-[Visual Studio]: https://www.visualstudio.com/ "Visual Studio"
-[Visual C++ Build Tools]: http://landinghub.visualstudio.com/visual-cpp-build-tools "Visual C++ Build Tools"
-[MSYS2]: https://msys2.github.io/ "MSYS2"
-[win/readme.md]: https://github.com/IfcOpenShell/IfcOpenShell/tree/master/win/readme.md "win/readme.md"
-[nix/build-all.py]: https://github.com/IfcOpenShell/IfcOpenShell/tree/master/nix/build-all.py "nix/build-all.py"
- 
- 
+## 2. Proposed Solution
 
+**ClearSight** proposes the creation of a web-based platform to collect, process, and visualize **SAR satellite data** for near real-time disaster monitoring.
+
+### Key Advantages of SAR
+- **Weather independence:** Operates day and night, unaffected by sunlight or clouds.  
+- **Atmospheric penetration:** Microwaves pass through dust, rain, or volcanic ash.  
+- **Ground displacement detection:** Measures deformations at centimeter scale.
+
+---
+
+## 3. Current Limitations
+
+While SAR offers huge advantages, most commercial satellites still have **multi-day revisit times**.  
+However, emerging constellations like **Capella Space**, **ICEYE**, and **Umbra** are reducing this to **less than one hour**, unlocking operational use cases.
+
+---
+
+## 4. Technological Context
+
+The space industry is growing rapidly — **over 70,000 LEO satellites** are expected to launch within five years.  
+These satellites will orbit between **160–1,900 km**, completing one revolution every 90 minutes.
+
+According to **Goldman Sachs Research**, the satellite market could grow from **$15B to $108B by 2035**, with potential to reach **$457B** in optimistic scenarios.
+
+### Cost & Ecosystem
+- Launch cost: up to **$12,000/kg**, expected to fall to **$100–200/kg** with reusable rockets.  
+- LEO systems will complement terrestrial networks, enabling hybrid global connectivity.
+
+---
+
+## 5. Applications
+
+| Domain | Use Case |
+| ------- | -------- |
+| **Emergency Management** | Floods, fires, and volcanic eruption monitoring |
+| **Infrastructure Monitoring** | Detect land movement near dams, roads, or buildings |
+| **Agriculture & Water** | Soil moisture estimation, flood zone detection |
+| **Environmental Studies** | Track deforestation, erosion, and glacial retreat |
+
+---
+
+## 6. Platform Architecture
+
+### Cloud Infrastructure (AWS)
+
+| Layer | Services |
+|-------|-----------|
+| Data Ingestion & Storage | AWS Lambda / Glue, S3, RDS / DynamoDB |
+| Processing & AI Analysis | AWS SageMaker, EC2 / Fargate |
+| APIs & Frontend | API Gateway + Lambda, CloudFront + S3 |
+| Authentication | AWS Cognito |
+| Payments | Stripe / AWS Marketplace |
+
+### System Overview
+- Interactive map viewer  
+- Satellite imagery database  
+- Role-based access control  
+- AI-powered alerts  
+- Premium report and download system  
+
+---
+
+## 7. Functional Modules
+
+### 7.1. Home Interface
+- Interactive world map with zoom and search  
+- Login/Sign-up options  
+- Alerts and notifications panel  
+
+### 7.2. User Roles
+
+| Role | Permissions |
+|------|--------------|
+| **Public Users** | Browse free maps, set alerts, request new data |
+| **Authorities / Governments** | Access premium SAR data, generate reports, receive AI alerts |
+
+### 7.3. Map & Reports
+- Sidebar shows available SAR maps by region  
+- Options to download, purchase, or request data  
+- Smart Reports combine SAR data with socioeconomic layers  
+
+---
+
+## 8. Data Sources
+
+- **NASA Earthdata** (Sentinel, Landsat, RADARSAT)  
+- **ESA Copernicus**  
+- **OpenStreetMap** and national GIS databases  
+- Government infrastructure and census data  
+
+---
+
+## 9. Non-Functional Requirements
+
+| Requirement | Description |
+|--------------|-------------|
+| Scalability | Auto-scaling backend (ECS/Fargate) |
+| Security | Cognito + IAM roles |
+| Data Privacy | GDPR-compliant |
+| Performance | Map load < 3s, API < 500ms |
+| Reliability | 99.9% uptime |
+| Localization | Multi-language support (Phase 2) |
+
+---
+
+## 10. Future Enhancements
+
+- Mobile app for citizen reporting and offline access  
+- Crowdsourced validation of detected changes  
+- Multi-level alert severity (Minor, Moderate, Critical)  
+- Integration with official emergency systems  
+- Full multilingual support  
+
+---
+
+## License
+
+This project is open-source and distributed under the **MIT License**.  
+Feel free to fork, modify, and contribute.
+
+---
+
+## Acknowledgments
+
+This research draws inspiration from recent SAR and LEO advancements reported by:
