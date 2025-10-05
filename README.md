@@ -1,11 +1,10 @@
 # SARWatch
-============
 
 <p align="center">
   <img src="SARWatch frontend.jpg" width="600" alt="SAR Satellite Example">
 </p>
 
-**SARWatch** is an open-source research initiative and prototype platform that leverages **Synthetic Aperture Radar (SAR)** satellite imagery for **real-time monitoring and analysis of natural disasters**.  
+**SARWatch** is an SaaS initiative and prototype platform, ^[oficial site](https://sarwatch.earth), that leverages **Synthetic Aperture Radar (SAR)** satellite imagery for **real-time monitoring and analysis of natural disasters**.  
 The project aims to enable resilient, weather-independent Earth observation by integrating open and commercial SAR data through a modern, cloud-based architecture.
 
 ---
@@ -88,6 +87,10 @@ According to **Goldman Sachs Research**, the satellite market could grow from **
 | **Agriculture & Water** | Soil moisture estimation, flood zone detection |
 | **Environmental Studies** | Track deforestation, erosion, and glacial retreat |
 
+<video width="600" controls>
+  <source src="InfrastructuresDamage.mp4" type="video/mp4">
+  Tu navegador no soporta el video.
+</video>
 ---
 
 ## 6. Platform Architecture
@@ -122,7 +125,8 @@ According to **Goldman Sachs Research**, the satellite market could grow from **
 
 | Role | Permissions |
 |------|--------------|
-| **Public Users** | Browse free maps, set alerts, request new data |
+| **Public Users** | Browse free old maps|
+| **Subscription Users** | Monitoring tools and acces to reports|
 | **Authorities / Governments** | Access premium SAR data, generate reports, receive AI alerts |
 
 ### 7.3. Map & Reports
@@ -148,8 +152,7 @@ According to **Goldman Sachs Research**, the satellite market could grow from **
 | Scalability | Auto-scaling backend (ECS/Fargate) |
 | Security | Cognito + IAM roles |
 | Data Privacy | GDPR-compliant |
-| Performance | Map load < 3s, API < 500ms |
-| Reliability | 99.9% uptime |
+| Performance | Map load < 3s, API < 500ms (Expected) |
 | Localization | Multi-language support (Phase 2) |
 
 ---
@@ -164,15 +167,12 @@ According to **Goldman Sachs Research**, the satellite market could grow from **
 
 ---
 
-## License
-
-This project is open-source and distributed under the **MIT License**.  
-Feel free to fork, modify, and contribute.
-
----
-
 ## Acknowledgments
 
-This research draws inspiration from recent SAR and LEO advancements reported by:
+Claude --> used for web page creation
+Ai.invideo.io --> Video generation
+GoogleCloud Text to speach --> Audio generation
+ChatGPT --> consulting tool
+
 
 
