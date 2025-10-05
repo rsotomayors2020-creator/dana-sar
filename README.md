@@ -134,6 +134,10 @@ According to **Goldman Sachs Research**, the satellite market could grow from **
 - Options to download, purchase, or request data  
 - Smart Reports combine SAR data with socioeconomic layers  
 
+<p align="center">
+  <img src="InfrastructuresDamage.mp4" width="600" alt="SAR Satellite Example">
+</p>
+
 ---
 
 ## 8. Data Sources
@@ -173,6 +177,7 @@ According to **Goldman Sachs Research**, the satellite market could grow from **
 - Ai.invideo.io --> Video generation
 - GoogleCloud Text to speach --> Audio generation
 - ChatGPT --> consulting tool
+
 
 
 
