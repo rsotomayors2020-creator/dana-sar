@@ -1,0 +1,160 @@
+process_and_costs.py — Flood mapping + building impacts + € costs
+
+What it does (civil engineering):
+• Turns a Sentinel-1 radar backscatter image into a binary flood map (water / no-water).
+• Intersects flood polygons with cadastral building footprints to compute: flooded area per building (m²), % of building flooded, and a first-order monetary impact (€ = m² × €/m²).
+• Produces geospatial layers and CSV summaries you can open in any GIS or spreadsheet.
+
+How it works (computing):
+
+Loads the AOI (zona.geojson) and SAR rasters (VH/VV + incidence angle).
+
+Applies radiometric logic: if input appears linear it converts to dB; thresholds water (default −20 dB); optionally filters by Local Incidence Angle (LIA) range to reduce layover/shadow noise.
+
+Vectorizes the water mask to flood polygons (raster→vector).
+
+Loads building footprints (CONSTRU.SHP), reprojects to a metric CRS, computes each footprint’s area, intersects with flood polygons, aggregates flooded area per building, and multiplies by €/m² (fixed or CSV lookup).
+
+Writes open outputs:
+• data/results/water_mask.tif (GeoTIFF, 0/1)
+• data/results/flood.gpkg (layer “flood”)
+• data/results/viviendas_inundacion.gpkg (“viviendas_all”, “viviendas_afectadas”, “viviendas_x_inundacion_geom”)
+• CSVs: per-building summary, total cost, and (optional) per-zone totals.
+
+Why it matters:
+• Converts raw radar into actionable indicators a civil protection team needs on Day-1: where the water is; how many m² of buildings are hit; an order-of-magnitude cost.
+• The LIA filter and dB logic are standard SAR hygiene to avoid common misclassifications in urban/vegetated areas.
+
+Key parameters you can tune:
+• WATER_THRESHOLD_DB (default −20.0) — detection cutoff.
+• USE_LIA_FILTER / LIA_MIN_DEG–LIA_MAX_DEG — quality filter.
+• PRICE_MODE (“fixed” or “csv”), FIXED_EUR_M2 — economic model.
+• MIN_FLOOD_AREA_M2 — ignore tiny overlaps/noise.
+
+Inputs:
+• data/raw/current_s1_rtc/*.tif (VH/VV + incidence map)
+• data/aoi/zona.geojson (AOI polygon)
+• data/dem/raw/_buildings/CONSTRU_sample/CONSTRU.SHP (buildings)
+
+Outputs:
+• Flood mask/polygons + building impacts and costs (GeoTIFF, GPKG, CSV).
+
+04_impact_infra.py — Road network impact (km cut off)
+
+What it does (civil engineering):
+• Quantifies the length of road network affected by flood, using a realistic carriageway buffer: ±4.5 m from centerline (≈ 9 m total width).
+• Returns a single KPI for operations: km of road likely interrupted.
+
+How it works (computing):
+
+Clips roads to the AOI to keep processing local.
+
+Buffers the centerlines by 4.5 m (per-side), unions buffers, and intersects with flood polygons derived from the water mask.
+
+Reprojects the intersection to a metric CRS and sums polygon perimeters/lengths to kilometers.
+
+Why it matters:
+• Turns a map into a logistics number: how many km are compromised.
+• The width assumption is explicit and editable (by class of road if you later add attributes).
+
+Key parameters you can tune:
+• ROAD_BUFFER_M (default 4.5) — half-width from centerline.
+• ROADS_LAYER (default "rt_tramo_vial") — layer name in roads.gpkg.
+
+Inputs:
+• data/aoi/roads.gpkg (Valencia road network; layer “rt_tramo_vial”)
+• data/results/water_mask.tif (or flood.gpkg)
+• data/aoi/zona.geojson
+
+Outputs:
+• data/impact/impacto_infra.csv → km_carretera_afectada (float, km).
+
+run_pipeline.py — One-click end-to-end run
+
+What it does:
+• Orchestrates the full demo: first runs process_and_costs.py, then 04_impact_infra.py.
+• Fails fast if any step errors, so you know exactly where to look.
+
+Why it matters:
+• For judges and non-GIS users: one command, reproducible outputs.
+
+Inputs / Outputs:
+• Same as the two scripts above; this just sequences them.
+
+script_qgis.py (Loader for visualization in QGIS) — Optional
+
+What it does:
+• Loads the generated layers into QGIS with quick, readable styling:
+– water_mask.tif (50% opacity), flood polygons in blue, buildings with red outlines for affected features, and roads as light gray.
+• Adds visual highlights (large ring around flood and a water-drop marker) to make hotspots pop for presentation.
+
+Why it matters:
+• Gives a clean, standardized map view in seconds; no manual symbology needed.
+• Perfect for live demos and screenshots.
+
+Inputs:
+• The outputs produced by the pipeline (GeoTIFF/GPKG) and roads.gpkg.
+
+Outputs:
+• A styled QGIS project view (no files written; it’s a display helper).
+
+Data folders (for context)
+
+• data/raw/current_s1_rtc/ → Sentinel-1 RTC GeoTIFFs (VH/VV + incidence)
+• data/aoi/zona.geojson → AOI boundary; roads.gpkg → road network (Valencia)
+• data/dem/raw/_buildings/CONSTRU_sample/CONSTRU.SHP → building footprints
+• data/results/ → flood mask & building impact outputs
+• data/impact/ → roads impact outputs
+
+How to run (typical judge flow)
+
+(Recommended) Use conda on Windows/macOS/Linux:
+conda create -n dana-sar python=3.11 -y
+conda activate dana-sar
+conda install -c conda-forge gdal rasterio geopandas shapely pyproj fiona rtree -y
+pip install pandas numpy
+
+From the repo root, run the full pipeline:
+python ./src/run_pipeline.py
+
+Open the KPIs (no GIS required):
+
+data/results/costes_resumen_total.csv → total € impact
+
+data/impact/impacto_infra.csv → km of roads affected
+
+(Optional) Open QGIS for the map:
+
+Load script_qgis.py via QGIS Python Console to auto-load & style layers.
+
+Typical console messages you’ll see:
+• “[OK] Máscara de agua → …/water_mask.tif”
+• “[OK] Polígonos inundación → …/flood.gpkg (features: …)”
+• “[VIVIENDAS] … [COSTE] Estimado total: … €”
+• “[OK] …/impacto_infra.csv → km afectados (buffer ±4.5 m): … km”
+
+Design choices that show engineering + informatics rigor
+
+• SAR specifics: thresholding in dB with optional LIA filter reduces urban/vegetation false positives.
+• Geodesy: all intersections and lengths are computed in an appropriate metric CRS (auto-estimated UTM fallback).
+• Data model: open, standard formats (GeoTIFF, GeoPackage, CSV) for traceability and easy ingestion in any GIS or emergency system.
+• Reproducibility: deterministic scripts; parameters centralized and documented; one-click pipeline.
+• Decision-readiness: outputs are KPIs (m² flooded, € loss proxy, km of roads) — not just pretty maps.
+
+What to tweak during a live demo (30–60 seconds each)
+
+• Change WATER_THRESHOLD_DB (e.g., −19 to −21 dB) and re-run to show sensitivity.
+• Toggle USE_LIA_FILTER to show quality control.
+• Switch FIXED_EUR_M2 (e.g., 800 → 1,400 €/m²) to reflect different asset types.
+• Adjust ROAD_BUFFER_M (e.g., 3.5 m for urban streets; 6.0 m for dual carriageways).
+All re-runs write new CSVs; close open files in QGIS before overwriting.
+
+Limits (acknowledged) and how the code mitigates them
+
+• Urban layover/shadow and tall vegetation can cause SAR false positives → mitigated with LIA filtering and conservative thresholding.
+• Water depth is NOT estimated; costs are a first-order proxy (€ per m² flooded) → framed accordingly in the outputs.
+• If AOI is outside the raster, the scripts fail fast with clear messages.
+• Performance scales with road/building layer size → the code clips to AOI before heavy ops.
+
+That’s the whole stack at a glance:
+process_and_costs.py (flood + buildings + €) → 04_impact_infra.py (roads km) → run_pipeline.py (one-shot) → script_qgis.py (instant map).
