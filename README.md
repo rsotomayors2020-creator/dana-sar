@@ -2,7 +2,7 @@
 ============
 
 <p align="center">
-  <img src="https://upload.wikimedia.org/wikipedia/commons/9/9d/SAR_satellite_example.jpg" width="600" alt="SAR Satellite Example">
+  <img src="SARWatch frontend.jpg" width="600" alt="SAR Satellite Example">
 </p>
 
 **ClearSight** is an open-source research initiative and prototype platform that leverages **Synthetic Aperture Radar (SAR)** satellite imagery for **real-time monitoring and analysis of natural disasters**.  
@@ -174,3 +174,4 @@ Feel free to fork, modify, and contribute.
 ## Acknowledgments
 
 This research draws inspiration from recent SAR and LEO advancements reported by:
+
